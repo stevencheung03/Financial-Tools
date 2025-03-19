@@ -5,7 +5,7 @@ double log_return(const double current, const double previous);
 
 double npv(const double initialInvestment, const double discountRate, const double* cashFlows, const unsigned int n);
 
-// double* cReturns(const double* assetPrices, const unsigned int T);
+double* cReturns(const double* assetPrices, const unsigned int T);
 
 // double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T);
 

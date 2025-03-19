@@ -21,6 +21,18 @@ double npv(const double initialInvestment, const double discountRate, const doub
     return net_present_value;
 }
 
+double* cReturns(const double* assetPrices, const unsigned int T)
+{
+    double* returns = new double[T-1];
+
+    for (unsigned int i = 1; i < T; i += 1)
+    {
+        returns[i - 1] = log_return(assetPrices[i], assetPrices[i - 1]);
+    }
+
+    return returns;
+}
+
 int main()
 {
     npv_test();
