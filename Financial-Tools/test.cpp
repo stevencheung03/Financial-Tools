@@ -47,7 +47,7 @@ void npv_test()
             std::cout << "Test ZeroInvestment passed!\n";
         }
         else
-        {
+        { 
             std::cout << "Test ZeroInvestment failed!\n";
         }
         std::cout << "Expected: " << expected << "\n";
