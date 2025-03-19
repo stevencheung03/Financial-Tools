@@ -4,6 +4,18 @@
 #include "test.h"
 
 
+double expected_value(const double* input)
+{
+    double sum = 0.0;
+
+    for (unsigned int i = 0; i < sizeof(input); i += 1)
+    {
+        sum += input[i];
+    }
+
+    return sum/sizeof(n);
+}
+
 double log_return(const double current, const double previous)
 {
     return log(current / previous);
@@ -31,6 +43,11 @@ double* cReturns(const double* assetPrices, const unsigned int T)
     }
 
     return returns;
+}
+
+double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T)
+{
+    return 0.0
 }
 
 int main()
