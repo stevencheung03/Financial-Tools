@@ -59,7 +59,7 @@ double* cReturns(const double* assetPrices, const unsigned int T)
 
 double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T)
 {
-    return 0.0;
+    return (expected_value(assetReturns)-riskFreeRate) / (std::sqrt(sample_variance(input)));
 }
 
 int main()
