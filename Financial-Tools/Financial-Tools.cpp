@@ -16,6 +16,18 @@ double expected_value(const double* input)
     return sum/sizeof(n);
 }
 
+double sample_variance(const double* input)
+{
+    double sum = 0.0;
+
+    for (unsigned int i = 0; i < sizeof(input); i += 1)
+    {
+        sum += pow((input[i]-expected_value[input]), 2)
+    };;
+
+    return (1/(sizeof(input)))*sum;
+}
+
 double log_return(const double current, const double previous)
 {
     return log(current / previous);
@@ -47,7 +59,7 @@ double* cReturns(const double* assetPrices, const unsigned int T)
 
 double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T)
 {
-    return 0.0
+    return 0.0;
 }
 
 int main()

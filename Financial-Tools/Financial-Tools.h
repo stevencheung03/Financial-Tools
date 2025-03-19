@@ -3,6 +3,8 @@
 
 double expected_value(const double* input);
 
+double sample_variance(const double* input);
+
 double log_return(const double current, const double previous);
 
 double npv(const double initialInvestment, const double discountRate, const double* cashFlows, const unsigned int n);
