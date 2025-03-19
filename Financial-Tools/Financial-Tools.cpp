@@ -3,6 +3,12 @@
 
 #include "test.h"
 
+
+double log_return(const double current, const double previous)
+{
+    return log(current / previous);
+}
+
 double npv(const double initialInvestment, const double discountRate, const double* cashFlows, const unsigned int n)
 {
     double net_present_value = -initialInvestment;

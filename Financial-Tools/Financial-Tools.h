@@ -1,6 +1,8 @@
 #ifndef FINANCIAL_TOOLS_H
 #define FINANCIAL_TOOLS_H
 
+double log_return(const double current, const double previous);
+
 double npv(const double initialInvestment, const double discountRate, const double* cashFlows, const unsigned int n);
 
 // double* cReturns(const double* assetPrices, const unsigned int T);
