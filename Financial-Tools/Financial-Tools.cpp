@@ -8,24 +8,24 @@ double expected_value(const double* input)
 {
     double sum = 0.0;
 
-    for (unsigned int i = 0; i < sizeof(input); i += 1)
+    for (unsigned int i = 0; i < (sizeof(input) / sizeof(input[0])); i += 1)
     {
         sum += input[i];
     }
 
-    return sum/sizeof(n);
+    return sum/ (sizeof(input) / sizeof(input[0]));
 }
 
 double sample_variance(const double* input)
 {
     double sum = 0.0;
 
-    for (unsigned int i = 0; i < sizeof(input); i += 1)
+    for (unsigned int i = 0; i < (sizeof(input) / sizeof(input[0])); i += 1)
     {
-        sum += pow((input[i]-expected_value[input]), 2)
-    };;
+        sum += std::pow(input[i] - expected_value[input], 2);
+    };
 
-    return (1/(sizeof(input)))*sum;
+    return (1 / (sizeof(input) / sizeof(input[0])))*sum;
 }
 
 double log_return(const double current, const double previous)
@@ -39,7 +39,7 @@ double npv(const double initialInvestment, const double discountRate, const doub
 
     for (unsigned int i = 0; i < n; i += 1)
     {
-        net_present_value += (cashFlows[i] / pow((1 + discountRate), i+1));
+        net_present_value += (cashFlows[i] / std::pow((1 + discountRate), i+1));
     }
     
     return net_present_value;
@@ -59,7 +59,7 @@ double* cReturns(const double* assetPrices, const unsigned int T)
 
 double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T)
 {
-    return (expected_value(assetReturns)-riskFreeRate) / (std::sqrt(sample_variance(input)));
+    return (expected_value(assetReturns)-riskFreeRate) / (std::sqrt(sample_variance(assetReturns)));
 }
 
 int main()
