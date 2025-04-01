@@ -22,10 +22,10 @@ double sample_variance(const double* input)
 
     for (unsigned int i = 0; i < (sizeof(input) / sizeof(input[0])); i += 1)
     {
-        sum += std::pow(input[i] - expected_value[input], 2);
+        sum += std::pow(input[i] - expected_value[input[i]], 2);
     };
 
-    return (1 / (sizeof(input) / sizeof(input[0])))*sum;
+    return (1 / ((sizeof(input) / sizeof(input[0])) - 1)) * sum;
 }
 
 double log_return(const double current, const double previous)
@@ -59,7 +59,7 @@ double* cReturns(const double* assetPrices, const unsigned int T)
 
 double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T)
 {
-    return (expected_value(assetReturns)-riskFreeRate) / (std::sqrt(sample_variance(assetReturns)));
+    return (expected_value(assetReturns) - riskFreeRate) / (std::sqrt(sample_variance(assetReturns)));
 }
 
 int main()
