@@ -1,4 +1,5 @@
-#include <iostream>
+﻿#include <iostream>
+#include <cassert>
 
 #include "Financial-Tools.h"
 
@@ -87,4 +88,38 @@ void npv_test()
         std::cout << "Got: " << result << "\n";
         std::cout << "\n";
     }
+}
+
+
+void test_cumulative_log_returns()
+{
+    double assetPrices[] = { 100.0, 105.0, 110.25 };  // T = 3
+    unsigned int T = sizeof(assetPrices) / sizeof(assetPrices[0]);
+
+    double* returns = cReturns(assetPrices, T);
+
+    // Expected cumulative log returns
+    double expected[] = {
+        std::log(100.0 / 100.0),   // = 0.0
+        std::log(105.0 / 100.0),   // ≈ 0.04879
+        std::log(110.25 / 100.0)   // ≈ 0.09531
+    };
+
+    for (unsigned int i = 0; i < T; ++i)
+    {
+        if ((returns[i] - expected[i]) < 1e-6)
+        {
+            std::cout << i << " Test passed!\n";
+        }
+        else
+        { 
+            std::cout << i << " Test failed!\n";
+        }
+        std::cout << "Cumulative Return " << i << ": " << returns[i]
+            << " (expected " << expected[i] << ")\n";
+    }
+
+    std::cout << "All cumulative return tests passed!\n";
+
+    delete[] returns;
 }

@@ -51,11 +51,11 @@ double npv(const double initialInvestment, const double discountRate, const doub
 
 double* cReturns(const double* assetPrices, const unsigned int T)
 {
-    double* returns = new double[T-1];
+    double* returns = new double[T];
 
-    for (unsigned int i = 1; i < T; i += 1)
+    for (unsigned int i = 0; i < T; i += 1)
     {
-        returns[i - 1] = log_return(assetPrices[i], assetPrices[i - 1]);
+        returns[i] = log_return(assetPrices[i], assetPrices[i-i]);
     }
 
     return returns;
@@ -69,4 +69,5 @@ double sharpe(const double* assetReturns, const double riskFreeRate, const unsig
 int main()
 {
     npv_test();
+    test_cumulative_log_returns();
 }
