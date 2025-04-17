@@ -70,4 +70,5 @@ int main()
 {
     npv_test();
     test_cumulative_log_returns();
+    test_sharpe();
 }

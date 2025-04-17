@@ -123,3 +123,24 @@ void test_cumulative_log_returns()
 
     delete[] returns;
 }
+
+
+void test_sharpe()
+{
+    double returns[] = { 0.10, 0.12, 0.08, 0.09, 0.11 };
+    unsigned int T = sizeof(returns) / sizeof(returns[0]);
+    double riskFreeRate = 0.04;
+
+    // Manually calculate expected Sharpe ratio
+    double mean = expected_value(returns, T);     // = 0.10
+    double stdDev = std::sqrt(sample_variance(returns, T));
+    double expectedSharpe = (mean - riskFreeRate) / stdDev;
+
+    double result = sharpe(returns, riskFreeRate, T);
+
+    // Allow for floating point rounding error
+    assert(std::fabs(result - expectedSharpe) < 1e-9);
+
+    std::cout << "Sharpe Ratio: " << result << " (expected " << expectedSharpe << ")\n";
+    std::cout << "Sharpe ratio test passed!" << std::endl;
+}

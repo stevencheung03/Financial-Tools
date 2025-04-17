@@ -3,5 +3,6 @@
 
 void npv_test();
 void test_cumulative_log_returns();
+void test_sharpe();
 
 #endif
