@@ -66,6 +66,28 @@ double sharpe(const double* assetReturns, const double riskFreeRate, const unsig
     return (expected_value(assetReturns, T) - riskFreeRate) / (std::sqrt(sample_variance(assetReturns, T)));
 }
 
+double* smas(const double* assetPrices, const unsigned int k, const unsigned int T)
+{
+    double sum = 0.0;
+    unsigned int numSMAs = T - k + 1;
+    double* result = new double[numSMAs];
+
+    for (unsigned int i = 0; i < k; ++i)
+    {
+        sum += assetPrices[i];
+    }
+
+    result[0] = sum / k;
+
+    for (unsigned int i = 1; i < numSMAs; ++i)
+    {
+        sum = sum + assetPrices[i + k - 1] - assetPrices[i - 1];
+        result[i] = sum / k;
+    }
+
+    return result;
+}
+
 int main()
 {
     npv_test();
