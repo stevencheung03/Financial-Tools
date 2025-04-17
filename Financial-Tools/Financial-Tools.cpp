@@ -4,28 +4,32 @@
 #include "test.h"
 
 
-double expected_value(const double* input)
+double expected_value(const double* input, size_t size)
 {
     double sum = 0.0;
 
-    for (unsigned int i = 0; i < (sizeof(input) / sizeof(input[0])); i += 1)
+    for (unsigned int i = 0; i < size; i += 1)
     {
         sum += input[i];
     }
 
-    return sum/ (sizeof(input) / sizeof(input[0]));
+    return sum/size;
 }
 
-double sample_variance(const double* input)
+double sample_variance(const double* input, size_t size)
 {
+    if (size < 2) return 0.0;  // avoid division by zero
+
+    double mean = 0.0;
+    for (size_t i = 0; i < size; ++i)
+        mean += input[i];
+    mean /= size;
+
     double sum = 0.0;
+    for (size_t i = 0; i < size; ++i)
+        sum += std::pow(input[i] - mean, 2);
 
-    for (unsigned int i = 0; i < (sizeof(input) / sizeof(input[0])); i += 1)
-    {
-        sum += std::pow(input[i] - expected_value[input[i]], 2);
-    };
-
-    return (1 / ((sizeof(input) / sizeof(input[0])) - 1)) * sum;
+    return sum / (size - 1);
 }
 
 double log_return(const double current, const double previous)
@@ -59,7 +63,7 @@ double* cReturns(const double* assetPrices, const unsigned int T)
 
 double sharpe(const double* assetReturns, const double riskFreeRate, const unsigned int T)
 {
-    return (expected_value(assetReturns) - riskFreeRate) / (std::sqrt(sample_variance(assetReturns)));
+    return (expected_value(assetReturns, T) - riskFreeRate) / (std::sqrt(sample_variance(assetReturns, T)));
 }
 
 int main()
