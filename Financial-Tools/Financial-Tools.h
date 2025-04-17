@@ -1,9 +1,9 @@
 #ifndef FINANCIAL_TOOLS_H
 #define FINANCIAL_TOOLS_H
 
-double expected_value(const double* input);
+double expected_value(const double* input, size_t size);
 
-double sample_variance(const double* input);
+double sample_variance(const double* input, size_t size);
 
 double log_return(const double current, const double previous);
 
